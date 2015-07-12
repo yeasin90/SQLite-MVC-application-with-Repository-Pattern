@@ -1,0 +1,51 @@
+﻿@model CriminalSearch.Models.CriminalSearchViewModel
+@{
+    ViewBag.Title = "Show Criminal Records";
+}
+
+<h2>Show Criminal Records</h2>
+
+<table class="table" id="records">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Height</th>
+            <th>Nationality</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Criminals.Count == 0)
+        {
+            <tr>
+                <td>No Records Found</td>
+            </tr>
+        }
+        @foreach (var criminal in Model.Criminals)
+        {
+            <tr>
+                <td>@criminal.ID</td>
+                <td>@criminal.Name</td>
+                <td>@criminal.Email</td>
+                <td>@criminal.Age</td>
+                <td>@criminal.Sex</td>
+                <td>@criminal.Height</td>
+                <td>@criminal.Nationality</td>
+                <td><a href="/home/ShowPDF/@criminal.ID" target="_blank">View PDF</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#records").DataTable();
+        });
+    </script>
+}

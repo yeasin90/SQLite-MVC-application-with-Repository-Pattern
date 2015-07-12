@@ -1,0 +1,42 @@
+﻿@model CriminalSearch.Models.LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="loginForm">
+<h2>Use a local account to log in.</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                <label>Username</label>
+                <input type="text" name="UserName" value="@Model.UserName" data-validate="required" />
+            </li>
+            <li>
+                <label>Password</label>
+                <input type="password" name="Password" value="" data-validate="required" />
+            </li>
+            <li>
+                <label>Remember Me</label>
+                <input type="checkbox" value="true" name="RememberMe" />
+            </li>
+        </ol>
+        <input type="submit" value="Log in" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
+}
+</section>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

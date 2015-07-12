@@ -1,0 +1,37 @@
+﻿@model CriminalSearch.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create a new account.</h2>
+</hgroup>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                <label>Username</label>
+                <input type="text" name="UserName" value="@Model.UserName" data-validate="required,min(4),max(8),alphaNumeric" />
+            </li>
+            <li>
+                <label>Email</label>
+                <input type="text" name="Email" value="@Model.Email" data-validate="required,email" />
+            </li>
+            <li>
+                <label>Password</label>
+                <input type="password" name="Password" value="" data-validate="required,min(4),max(6)" />
+            </li>
+        </ol>
+        <input type="submit" value="Register" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

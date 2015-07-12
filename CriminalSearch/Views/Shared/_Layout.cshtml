@@ -1,0 +1,64 @@
+﻿@{
+    CriminalSearch.Models.NotyMessage noty = TempData["NotyMessage"] as CriminalSearch.Models.NotyMessage;
+    if (noty != null)
+    {
+    <input type="hidden" class="noty-message" value="@noty.ResponseMessage" />
+    <input type="hidden" class="noty-type" value="@noty.ResponseType" />
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/verify.min.js"></script>
+    <script src="~/Scripts/verify.notify.min.js"></script>
+    <script src="~/Scripts/jquery.noty.packaged.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(function () {
+            if ($(".noty-message").val()) {
+                var message = $(".noty-message").val();
+                var type = $(".noty-type").val();
+                noty({ text: message, type: type, duration: 5000, layout: 'top' })
+            }
+        })();
+    </script>
+</body>
+</html>

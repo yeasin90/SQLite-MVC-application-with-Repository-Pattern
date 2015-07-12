@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<ol class="round">
+    <li class="one">
+        <form action="/home/ShowCriminalRecords">
+            <h5>Input Search Parameters</h5>
+            <br />
+            <label>Search By</label><br />
+            <select id="searchBy" name="SearchBy" data-validate="required">
+                <option value="">-- Select Category --</option>
+                <option value="0">Name</option>
+                <option value="1">Age</option>
+                <option value="3">Height</option>
+                <option value="4">Nationality</option>
+            </select>
+            <div id="singleInput" hidden="hidden">
+                <label>Input</label>
+                <input type="text" id="inputData" name="SingleInput" data-validate="required" />
+            </div>
+            <div id="rangeInput" hidden="hidden">
+                <label>From</label>
+                <input type="text" id="rangeFrom" name="Range" data-validate="required,number" />
+                <br />
+                <label>To</label>
+                <input type="text" id="rangeTo" name="Range" data-validate="required,number" />
+            </div>
+
+            <input type="submit" value="Search" />
+        </form>
+
+    </li>
+</ol>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#searchBy").change(function (event) {
+                if ($(this).val() == '0' || $(this).val() == '4') {
+                    $("#singleInput").show();
+                    $("#rangeInput").hide();
+                }
+                else if ($(this).val() == '1' || $(this).val() == '3') {
+                    $("#singleInput").hide();
+                    $("#rangeInput").show();
+                }
+                else if ($(this).val() == '') {
+                    $("#singleInput").hide();
+                    $("#rangeInput").hide();
+                }
+            });
+        });
+    </script>
+}
